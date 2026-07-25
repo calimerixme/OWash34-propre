@@ -377,15 +377,25 @@ h1 em {
   background:var(--navy);
   color:var(--paper)
 }
-
+.promise>.shell > div:first-child {
+    margin-top:60px;
+}
 .promise h2 {
   margin:0;
   font-size:clamp(3rem,5.5vw,5.4rem);
   line-height:.9
 }
 
-.promise>div>div:last-child {
-  align-self:end
+.promise-side {
+  display:flex;
+  min-height:100%;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:34px;
+}
+
+.promise-copy {
+  align-self:end;
 }
 
 .promise p:not(.eyebrow) {
@@ -400,6 +410,86 @@ h1 em {
   color:var(--aqua);
   font-size:.84rem;
   font-weight:900
+}
+
+.review-card {
+  position:relative;
+  min-height:245px;
+  padding:30px 32px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:18px;
+  background:rgba(255,255,255,.055);
+  box-shadow:0 18px 45px rgba(0,0,0,.14);
+  animation:reviewFade .55s ease both;
+}
+
+.review-card::after {
+  position:absolute;
+  right:22px;
+  top:-28px;
+  content:"“";
+  color:rgba(255,255,255,.055);
+  font:12rem/1 var(--serif);
+}
+
+.review-stars {
+  position:relative;
+  z-index:1;
+  color:#e7c56b;
+  font-size:1rem;
+  letter-spacing:.18em;
+}
+
+.review-card blockquote {
+  position:relative;
+  z-index:1;
+  max-width:520px;
+  margin:24px 0 26px;
+  color:var(--paper);
+  font:1.55rem/1.28 var(--serif);
+  letter-spacing:-.025em;
+}
+
+.review-meta {
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:7px 11px;
+}
+
+.review-meta strong {
+  color:var(--paper);
+  font-size:.82rem;
+}
+
+.review-meta span {
+  color:var(--aqua);
+  font-size:.78rem;
+  font-weight:800;
+}
+
+.review-meta small {
+  flex-basis:100%;
+  margin-top:3px;
+  color:rgba(255,255,255,.58);
+  font-size:.7rem;
+  font-weight:800;
+  letter-spacing:.04em;
+}
+
+@keyframes reviewFade {
+  from {
+    opacity:0;
+    transform:translateY(8px);
+  }
+
+  to {
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .steps {
@@ -1069,6 +1159,14 @@ footer nav {
     gap:33px
   }
 
+  .promise-side {
+    gap:28px;
+  }
+
+  .review-card {
+    min-height:0;
+  }
+
   .cards {
     grid-template-columns:repeat(2,1fr)
   }
@@ -1203,6 +1301,14 @@ footer nav {
 
   .promise>.shell {
     padding:40px 27px
+  }
+
+  .review-card {
+    padding:25px 22px;
+  }
+
+  .review-card blockquote {
+    font-size:1.3rem;
   }
 
   .steps {

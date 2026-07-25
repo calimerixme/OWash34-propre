@@ -25,6 +25,28 @@ const faqs = [
   ["Où intervenez-vous ?", "À Béziers et dans les communes proches. Contactez-nous pour confirmer votre secteur."],
 ];
 
+
+const reviews = [
+  {
+    text: "Terrasse redevenue comme neuve. Travail très soigné et ponctuel.",
+    name: "Sophie M.",
+    city: "Béziers",
+    service: "Terrasse",
+  },
+  {
+    text: "Intervention rapide et résultat impeccable sur nos bacs roulants.",
+    name: "Julien R.",
+    city: "Colombiers",
+    service: "Bacs roulants",
+  },
+  {
+    text: "Un service sérieux, discret et efficace. Je recommande sans hésiter.",
+    name: "Nathalie C.",
+    city: "Maureilhan",
+    service: "Muret",
+  },
+];
+
 const slides = [
   {
     type: "Terrasse",
@@ -58,6 +80,7 @@ export default function Home() {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [slide, setSlide] = useState(0);
+  const [review, setReview] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [waterEffect, setWaterEffect] = useState<
     "idle" | "active" | "done"
@@ -67,6 +90,14 @@ export default function Home() {
     const timer = window.setInterval(() => {
       setSlide((current) => (current + 1) % slides.length);
     }, 4500);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setReview((current) => (current + 1) % reviews.length);
+    }, 8000);
 
     return () => window.clearInterval(timer);
   }, []);
@@ -297,12 +328,25 @@ export default function Home() {
             <p className="eyebrow">La promesse O&apos;Wash</p>
             <h2>Vous travaillez !<br />Nous travaillons pour vous.</h2>
           </div>
-          <div>
-            <p>
-              Pendant votre journée, nous pouvons intervenir à votre domicile pour vos terrasses,
-              murets ou bacs roulants. À votre retour, votre extérieur retrouve sa propreté.
-            </p>
-            <a href="#contact">Organiser une intervention →</a>
+
+          <div className="promise-side">
+            <article className="review-card" key={review}>
+              <div className="review-stars" aria-label="5 étoiles">★★★★★</div>
+              <blockquote>“{reviews[review].text}”</blockquote>
+              <div className="review-meta">
+                <strong>{reviews[review].name}</strong>
+                <span>{reviews[review].city}</span>
+                <small>✓ {reviews[review].service}</small>
+              </div>
+            </article>
+
+            <div className="promise-copy">
+              <p>
+                Pendant votre journée, nous pouvons intervenir à votre domicile pour vos terrasses,
+                murets ou bacs roulants. À votre retour, votre extérieur retrouve sa propreté.
+              </p>
+              <a href="#contact">Organiser une intervention →</a>
+            </div>
           </div>
         </div>
       </section>
